@@ -1,0 +1,120 @@
+{
+  "generatedAt": "2026-02-12T17:30:06.484509+00:00",
+  "models": [
+    "codecformer",
+    "rvqgrid_dac",
+    "rvqgrid_encodec"
+  ],
+  "items": [
+    {
+      "id": "item0",
+      "mix": "audio/mixture/item0_mix.wav",
+      "groundTruth": {
+        "source1": "audio/mixture/item0_source1.wav",
+        "source2": "audio/mixture/item0_source2.wav"
+      },
+      "models": {
+        "codecformer": {
+          "source1": "audio/codecformer/item0_source1hat.wav",
+          "source2": "audio/codecformer/item0_source2hat.wav"
+        },
+        "rvqgrid_dac": {
+          "source1": "audio/rvqgrid_dac/item0_source1hat.wav",
+          "source2": "audio/rvqgrid_dac/item0_source2hat.wav"
+        },
+        "rvqgrid_encodec": {
+          "source1": "audio/rvqgrid_encodec/item0_source1hat.wav",
+          "source2": "audio/rvqgrid_encodec/item0_source2hat.wav"
+        }
+      }
+    },
+    {
+      "id": "item1",
+      "mix": "audio/mixture/item1_mix.wav",
+      "groundTruth": {
+        "source1": "audio/mixture/item1_source1.wav",
+        "source2": "audio/mixture/item1_source2.wav"
+      },
+      "models": {
+        "codecformer": {
+          "source1": "audio/codecformer/item1_source1hat.wav",
+          "source2": "audio/codecformer/item1_source2hat.wav"
+        },
+        "rvqgrid_dac": {
+          "source1": "audio/rvqgrid_dac/item1_source1hat.wav",
+          "source2": "audio/rvqgrid_dac/item1_source2hat.wav"
+        },
+        "rvqgrid_encodec": {
+          "source1": "audio/rvqgrid_encodec/item1_source1hat.wav",
+          "source2": "audio/rvqgrid_encodec/item1_source2hat.wav"
+        }
+      }
+    },
+    {
+      "id": "item2",
+      "mix": "audio/mixture/item2_mix.wav",
+      "groundTruth": {
+        "source1": "audio/mixture/item2_source1.wav",
+        "source2": "audio/mixture/item2_source2.wav"
+      },
+      "models": {
+        "codecformer": {
+          "source1": "audio/codecformer/item2_source1hat.wav",
+          "source2": "audio/codecformer/item2_source2hat.wav"
+        },
+        "rvqgrid_dac": {
+          "source1": "audio/rvqgrid_dac/item2_source1hat.wav",
+          "source2": "audio/rvqgrid_dac/item2_source2hat.wav"
+        },
+        "rvqgrid_encodec": {
+          "source1": "audio/rvqgrid_encodec/item2_source1hat.wav",
+          "source2": "audio/rvqgrid_encodec/item2_source2hat.wav"
+        }
+      }
+    },
+    {
+      "id": "item3",
+      "mix": "audio/mixture/item3_mix.wav",
+      "groundTruth": {
+        "source1": "audio/mixture/item3_source1.wav",
+        "source2": "audio/mixture/item3_source2.wav"
+      },
+      "models": {
+        "codecformer": {
+          "source1": "audio/codecformer/item3_source1hat.wav",
+          "source2": "audio/codecformer/item3_source2hat.wav"
+        },
+        "rvqgrid_dac": {
+          "source1": "audio/rvqgrid_dac/item3_source1hat.wav",
+          "source2": "audio/rvqgrid_dac/item3_source2hat.wav"
+        },
+        "rvqgrid_encodec": {
+          "source1": "audio/rvqgrid_encodec/item3_source1hat.wav",
+          "source2": "audio/rvqgrid_encodec/item3_source2hat.wav"
+        }
+      }
+    },
+    {
+      "id": "item4",
+      "mix": "audio/mixture/item4_mix.wav",
+      "groundTruth": {
+        "source1": "audio/mixture/item4_source1.wav",
+        "source2": "audio/mixture/item4_source2.wav"
+      },
+      "models": {
+        "codecformer": {
+          "source1": "audio/codecformer/item4_source1hat.wav",
+          "source2": "audio/codecformer/item4_source2hat.wav"
+        },
+        "rvqgrid_dac": {
+          "source1": "audio/rvqgrid_dac/item4_source1hat.wav",
+          "source2": "audio/rvqgrid_dac/item4_source2hat.wav"
+        },
+        "rvqgrid_encodec": {
+          "source1": "audio/rvqgrid_encodec/item4_source1hat.wav",
+          "source2": "audio/rvqgrid_encodec/item4_source2hat.wav"
+        }
+      }
+    }
+  ]
+}
