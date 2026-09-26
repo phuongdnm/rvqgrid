@@ -1,12 +1,13 @@
 # RVQ-Grid
 
-**Improving Audio Codec-based Speech Separation by Stacking Residual Vector Quantization Layers**
+**Improving Audio Codec-based Speech Separation By Stacking Residual Vector Quantization Layers**
 
-Accepted at **Interspeech 2026**.
+Published in **Interspeech 2026**, pages 7153–7157.
 
 - **Authors**: Nhu Minh Phuong Dinh, Roland Hartanto, Koichi Shinoda
 - **Institution**: Institute of Science Tokyo, Japan
-- **Link to the paper**: TBD
+- **Paper**: [ISCA Archive](https://www.isca-archive.org/interspeech_2026/dinh26_interspeech.html)
+- **DOI**: [10.21437/Interspeech.2026-2296](https://doi.org/10.21437/Interspeech.2026-2296)
 
 ## Abstract
 
@@ -26,4 +27,14 @@ Code will be released soon.
 
 ## BibTeX
 
-TBD.
+```bibtex
+@inproceedings{dinh26_interspeech,
+  title     = {{Improving Audio Codec-based Speech Separation By Stacking Residual Vector Quantization Layers}},
+  author    = {Nhu Minh Phuong Dinh and Roland Hartanto and Koichi Shinoda},
+  year      = {2026},
+  booktitle = {{Interspeech 2026}},
+  pages     = {7153--7157},
+  doi       = {10.21437/Interspeech.2026-2296},
+  issn      = {2958-1796},
+}
+```
