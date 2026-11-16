@@ -1,0 +1,150 @@
+# Basic parameters
+seed: 1234
+__set_seed: !apply:torch.manual_seed [1234]
+
+# Data params
+# e.g. '/yourpath/wsj0-mix/2speakers'
+data_folder: /workspace/data/wsj/WSJ0Mix/2speakers
+
+# the path for wsj0/si_tr_s/ folder
+base_folder_dm: /workspace/data/wsj/WSJ0Mix/2speakers
+
+experiment_name: rvq_gridnet_dac
+output_folder: !ref results/<experiment_name>/<seed>
+train_log: !ref <output_folder>/train_log.txt
+save_folder: !ref <output_folder>/save
+train_data: !ref <save_folder>/wsj_tr.csv
+valid_data: !ref <save_folder>/wsj_cv.csv
+test_data: !ref <save_folder>/wsj_tt.csv
+skip_prep: false
+
+# Experiment params
+auto_mix_prec: false
+test_only: false
+num_spks: 2
+noprogressbar: false
+save_audio: true
+n_audio_to_save: 5
+sample_rate: 8000
+
+# Training parameters
+N_epochs: 200
+batch_size: 4
+lr: 0.00015
+clip_grad_norm: 5
+loss_upper_lim: 999999
+limit_training_signal_len: false
+training_signal_len: 40000
+
+# Dynamic mixing
+dynamic_mixing: false
+
+# Data augmentation
+use_wavedrop: false
+use_speedperturb: true
+use_rand_shift: false
+min_shift: -8000
+max_shift: 8000
+
+# Speed perturbation
+speed_changes: [95, 100, 105]
+
+speed_perturb: !new:speechbrain.augment.time_domain.SpeedPerturb
+    orig_freq: !ref <sample_rate>
+    speeds: !ref <speed_changes>
+
+# Frequency drop
+drop_freq_low: 0
+drop_freq_high: 1
+drop_freq_count_low: 1
+drop_freq_count_high: 3
+drop_freq_width: 0.05
+
+drop_freq: !new:speechbrain.augment.time_domain.DropFreq
+    drop_freq_low: !ref <drop_freq_low>
+    drop_freq_high: !ref <drop_freq_high>
+    drop_freq_count_low: !ref <drop_freq_count_low>
+    drop_freq_count_high: !ref <drop_freq_count_high>
+    drop_freq_width: !ref <drop_freq_width>
+
+# Time drop
+drop_chunk_count_low: 1
+drop_chunk_count_high: 5
+drop_chunk_length_low: 1000
+drop_chunk_length_high: 2000
+
+drop_chunk: !new:speechbrain.augment.time_domain.DropChunk
+    drop_length_low: !ref <drop_chunk_length_low>
+    drop_length_high: !ref <drop_chunk_length_high>
+    drop_count_low: !ref <drop_chunk_count_low>
+    drop_count_high: !ref <drop_chunk_count_high>
+
+# Loss thresholding
+threshold_byloss: True
+threshold: -30
+
+# Dataloader options
+dataloader_opts:
+  batch_size: !ref <batch_size>
+  num_workers: 3
+
+test_dataloader_opts:
+  batch_size: 1
+  num_workers: 3
+
+# DAC parameters
+dac_dim: 1024
+n_codebooks: 12
+grid_dim: 512
+num_blocks: 6
+lstm_hidden: 512
+mask_hidden_dim: 0
+model_dropout: 0.1
+
+# DAC Wrapper
+dacmodel: !new:speechbrain.lobes.models.dac_wrapper_rvq.DACWrapperRVQ
+  input_sample_rate: 8000
+  DAC_model_path:   # If None, will download 16kHz model from HuggingFace
+  DAC_sample_rate: 16000
+  Freeze: true
+
+# RVQ-GridNet Separation Model
+sepmodel: !new:speechbrain.lobes.models.rvq_gridnet.RVQGridNet
+  num_spks: !ref <num_spks>
+  n_codebooks: !ref <n_codebooks>
+  dac_dim: !ref <dac_dim>
+  grid_dim: !ref <grid_dim>
+  num_blocks: !ref <num_blocks>
+  lstm_hidden: !ref <lstm_hidden>
+  mask_hidden_dim: !ref <mask_hidden_dim>
+  dropout: !ref <model_dropout>
+
+# Optimizer
+optimizer: !name:torch.optim.AdamW
+  lr: !ref <lr>
+  weight_decay: 0.01
+
+# Loss function
+loss: !name:speechbrain.nnet.losses.get_si_snr_with_pitwrapper
+
+# Learning rate scheduler
+lr_scheduler: !new:speechbrain.nnet.schedulers.ReduceLROnPlateau
+  factor: 0.5
+  patience: 5
+  dont_halve_until_epoch: 10
+
+epoch_counter: !new:speechbrain.utils.epoch_loop.EpochCounter
+  limit: !ref <N_epochs>
+
+modules:
+  sepmodel: !ref <sepmodel>
+
+checkpointer: !new:speechbrain.utils.checkpoints.Checkpointer
+  checkpoints_dir: !ref <save_folder>
+  recoverables:
+    sepmodel: !ref <sepmodel>
+    counter: !ref <epoch_counter>
+    lr_scheduler: !ref <lr_scheduler>
+
+train_logger: !new:speechbrain.utils.train_logger.FileTrainLogger
+  save_file: !ref <train_log>

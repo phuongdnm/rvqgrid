@@ -1,2 +1,12 @@
 # LaTeX paper source (kept out of the public repo)
 template.tex
+
+# Python caches
+__pycache__/
+*.pyc
+
+# SpeechBrain training outputs
+results/
+
+# macOS
+.DS_Store
