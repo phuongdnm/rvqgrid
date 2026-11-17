@@ -2,7 +2,7 @@
 
 **Improving Audio Codec-based Speech Separation By Stacking Residual Vector Quantization Layers**
 
-Published in **Interspeech 2026**, pages 7153–7157.
+Published in **Interspeech 2026**.
 
 - **Authors**: Nhu Minh Phuong Dinh, Roland Hartanto, Koichi Shinoda
 - **Institution**: Institute of Science Tokyo, Japan
@@ -23,7 +23,49 @@ SepFormer.
 
 ## Code
 
-Code will be released soon.
+### Environment
+
+- Python 3.11
+- PyTorch 2.7.1
+- CUDA 11.8
+
+```bash
+conda create -n rvqgrid python=3.11
+conda activate rvqgrid
+pip install torch==2.7.1 torchvision==0.22.1 torchaudio==2.7.1 --index-url https://download.pytorch.org/whl/cu118
+```
+
+### Installation
+
+```bash
+git clone https://github.com/speechbrain/speechbrain.git
+cd speechbrain
+git checkout v1.0.0
+
+pip install -r requirements.txt
+pip install -e .
+pip install descript-audio-codec encodec
+pip install pandas transformers
+```
+
+### Copy the RVQ-Grid files into SpeechBrain
+
+```bash
+cp src/models/*.py speechbrain/speechbrain/lobes/models/
+cp src/train_rvq_gridnet*.py speechbrain/recipes/WSJ0Mix/separation/
+cp src/hparams/*.yaml speechbrain/recipes/WSJ0Mix/separation/hparams/
+```
+
+### Training
+
+```bash
+# In speechbrain/recipes/WSJ0Mix/separation/
+# 1 GPU
+python train_rvq_gridnet.py hparams/RVQ_GridNet_DAC.yaml
+
+# Multiple GPUs
+CUDA_VISIBLE_DEVICES=0,1 torchrun --nproc_per_node=2 train_rvq_gridnet_encodec.py hparams/RVQ_GridNet_EnCodec.yaml
+```
 
 ## BibTeX
 
